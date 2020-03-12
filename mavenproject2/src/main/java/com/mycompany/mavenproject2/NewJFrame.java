@@ -6,6 +6,8 @@
 package com.mycompany.mavenproject2;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -15,10 +17,12 @@ public class NewJFrame extends javax.swing.JFrame {
     
     public String nome;
     public ArrayList<String> lista = new ArrayList();
+    //USO MÍNIMO DE RECURSOS: Classe Pessoa desnecessária
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+
+   public NewJFrame() {
         initComponents();
     }
 
@@ -34,7 +38,6 @@ public class NewJFrame extends javax.swing.JFrame {
         txtAluno = new javax.swing.JTextField();
         lblAluno = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,25 +68,18 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(lblAluno)
                         .addGap(18, 18, 18)
                         .addComponent(txtAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(343, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAluno))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSalvar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAluno))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalvar)
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         pack();
@@ -94,59 +90,47 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAlunoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if(lista.isEmpty()){
-              lista.add(txtAluno.getText());
-              
-        }
-            for(int i = 0; i <= lista.size(); i++){
-                if(lista.get(i).equals(txtAluno.getText())){
-                     lista.add(txtAluno.getText());
-                    System.out.println(lista.get(i));
-            }
-       
-                   
+        //CRIAÇÃO DE FUNÇÕES BEM ESTRUTURADAS
+        //UTILIZAÇÃO MELHOR DAS VARIAVEIS EXISTENTES: STRING NOME RECEBE O txtAluno
         
+        nome = txtAluno.getText();
+        if(lista.isEmpty()){
+              lista.add(nome);
+              System.out.println(nome);
+        } else{
+            //COMPARAÇÃO DO NOVO NOME INSERIDO: havia um looping infinito de inserção de nome
+            //PROGRAMAÇÃO FUNCIONAL SUGESTÃO: REVER A LÓGICA DO LAÇO FOR PARA VERIFICAR AS POSIÇÕES NA INSERÇÃO DO NOME
+          for(int i = 0; i < lista.size(); i++){
+                if(!lista.get(i).equals(nome)){
+                     lista.add(nome);
+                    System.out.println(lista.get(i));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nome já inserido");
+                }
+            }  
+        }
+                  // CÓDIGO ESTRUTURADO: faltou fechar a chave da função FOR 
     }//GEN-LAST:event_btnSalvarActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-      
-        /* Create and display the form */
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
             }
         });
+        
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAluno;
     private javax.swing.JTextField txtAluno;
     // End of variables declaration//GEN-END:variables
+    //USO MINIMO DE RECURSOS: EXCLUIR JLABEL INUTILIZADA
+    
 }
